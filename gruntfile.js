@@ -27,12 +27,24 @@ module.exports = function(grunt) {
         files: {
           'css/styles.css' : 'src/scss/styles.scss'
         }
+      },
+      build: {
+        options: {
+          outputStyle: 'compressed'
+        },
+        files: {
+          'css/styles.css' : 'src/scss/main.scss'
+        }
       }
     },
     watch: {
       js: {
         files: ['src/js/*.js'], //when these files change
         tasks: ['uglify:dev'] //run this task
+      },
+      css: {
+        files: ['src/scss/*.scss'], //again, when this changes...
+        tasks: ['sass:dev']//run this task
       }
     }
   });
@@ -44,6 +56,6 @@ module.exports = function(grunt) {
 
   // Register task(s)
   grunt.registerTask('default', ['uglify:dev', 'sass:dev']);
-  grunt.registerTask('build', ['uglify:build']);
+  grunt.registerTask('build', ['uglify:build', 'sass:build']);
 
 };
